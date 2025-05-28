@@ -5,45 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Serene</title>
   <style>
-    body {
-      font-family: monospace;
-      text-align: center;
+    * {
       margin: 0;
       padding: 0;
-      background-color: #f0f0f0;
+      box-sizing: border-box;
     }
-    header {
-      background: linear-gradient(to right, #fa9def, #6da3a1);
-      color: black;
-      padding: 1rem 0;
-      height: 50px;
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+      color: #1f2d3d;
+      text-align: center;
+    }
+
+    .hero {
+      background: url('SereneBackground.jpg') no-repeat center center/cover;
+      height: 100vh;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
     }
-    main {
-      padding: 2rem;
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 80px;
+      height: auto;
     }
-    footer {
-      background: linear-gradient(to right, #fa9def, #6da3a1);
-      color: black;
-      padding: 1rem 0;
-      position: fixed;
-      width: 100%;
+
+    .overlay {
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, #fff 100%);
+      position: absolute;
       bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+    }
+
+    .content {
+      position: relative;
+      padding: 3rem 1rem 6rem;
+      background-color: white;
+      border-top-left-radius: 2rem;
+      border-top-right-radius: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #1f2d3d;
+    }
+
+    p {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .button-primary {
+      background: linear-gradient(to right, #53a0fd, #8f68ff);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    .button-secondary {
+      background: white;
+      border: 1px solid #ccc;
+      color: #333;
+      padding: 1rem 2rem;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 80%;
+      max-width: 300px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="SereneLogo.PNG" alt="SereneLogo" style="width: 175px"; />
-  </header>
-    <main>
-    <p>This is the Serene homepage, Serene is an all in one app for building better habits!</p>
-  </main>
-  <footer>
-    <p>&copy; 2025 Serene</p>
-  </footer>
+
+  <div class="hero">
+    <img src="SereneLogo.PNG" alt="Serene Logo" class="logo" />
+    <div class="overlay"></div>
+  </div>
+
+  <div class="content">
+    <h1>Calm your mind. Change your life.</h1>
+    <p>The #1 app for sleep, meditation and relaxation</p>
+    <button class="button-primary">Try Serene for Free</button><br />
+    <button class="button-secondary">Already have an account?</button>
+  </div>
+
 </body>
 </html>
