@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Try Serene for Free</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Serene</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      background: url('background.jpg') no-repeat center center/cover;
+      background: url('background.PNG') no-repeat center center/cover;
       font-family: 'Segoe UI', sans-serif;
+      color: #2e2e2e;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      color: white;
+      justify-content: center;
       text-align: center;
     }
 
-    .content {
-      background: rgba(0, 0, 0, 0.5); 
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 500px;
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #3e2a59; /* soft muted purple */
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #5e5e5e;
     }
 
     .button {
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      color: #fff;
-      background-color: #5a67d8;
+      background: linear-gradient(90deg, #eca7d6, #7ac5b6);
       border: none;
-      border-radius: 6px;
+      border-radius: 50px;
+      padding: 0.9rem 2rem;
+      font-size: 1rem;
+      color: white;
       cursor: pointer;
-      margin-top: 1rem;
+      transition: opacity 0.3s ease;
     }
 
     .button:hover {
-      background-color: #434190;
+      opacity: 0.9;
     }
   </style>
 </head>
 <body>
-  <div class="content">
-    <h1>Welcome to Serene</h1>
-    <p>Experience calm, clarity, and daily balance. Try it for free today.</p>
-    <button class="button" onclick="window.location.href='app.html'">Start Now</button>
-  </div>
+  <h1>Welcome to Serene</h1>
+  <p>You're now on your way to a more peaceful daily routine.</p>
+  <button class="button" onclick="window.location.href='login.html'">Continue</button>
 </body>
 </html>
 
