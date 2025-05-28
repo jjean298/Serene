@@ -57,14 +57,26 @@
     .info-row {
   display: flex;
   justify-content: center;
-  gap: 2rem; /* space between items */
+  gap: 2rem;
   margin-top: 2rem;
-}
+  flex-wrap: wrap;  
+    }
 
-.info-row p {
+    .info-item {
+  text-align: center;
+  max-width: 200px;
+    }
+
+    .info-title {
   font-size: 1rem;
-  color: #555;
-  margin: 0;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0.5rem;
+    }
+
+.info-desc {
+  font-size: 0.9rem;
+  color: #777;
 }
 
     h1 {
@@ -120,9 +132,18 @@
   </div>
 
   <div class="info-row">
-    <p>Guided Meditation</p>
-    <p>Daily Journal</p>
-    <p>Progress Tracking</p>
+    <div class="info-item">
+      <p class="info-title">Digital Detox</p>
+      <p class="info-desc">Take a break from screens with guided unplugging sessions designed to help you recharge, focus, and improve mindfulness.</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Daily Journal</p>
+      <p class="info-desc">Capture your thoughts and track emotions daily, bring a deeper understanding to your daily life with the journal feature.</p>
+    </div>
+    <div class="info-item">
+      <p class="info-title">Stretching</p>
+      <p class="info-desc">Relieve tension and boost flexibility with guided stretching routines tailored for relaxation and daily movement.</p>
+    </div>
   </div>
 
 </body>
