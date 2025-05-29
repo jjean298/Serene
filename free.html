@@ -161,7 +161,7 @@
   <div class="glass-container">
     <div class="login-box">
         <h2>Login</h2>
-        <form action="#" method="POST">
+        <form onsubmit="event.preventDefault(); signup();">
 
           <input type="text" id="email" name="email" required placeholder="Email">
           
@@ -181,5 +181,51 @@
         </form>
     </div>
 </div>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
+    authDomain: "serene-interface.firebaseapp.com",
+    projectId: "serene-interface",
+    storageBucket: "serene-interface.firebasestorage.app",
+    messagingSenderId: "877337255174",
+    appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  function signup() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        alert("Signup successful!");
+        window.location.href = "login.html";
+      })
+      .catch(error => {
+        alert("Signup error: " + error.message);
+      });
+  }
+
+  // Optional: Redirect if already logged in
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      // Already logged in? Maybe redirect to dashboard
+      console.log("User already signed in");
+    }
+  });
+</script>
+
 </body>
 </html>
