@@ -15,7 +15,7 @@
   <div class="glass-container">
 
       <h2>Sign Up</h2>
-      <form onsubmit="event.preventDefault(); signup();">
+      <form action="submit" method="post">
           <label for="email"> Email </label>
           <input type="text" id="email" name="email" required/>
 
@@ -30,48 +30,6 @@
 
       </form>
   </div>
-// needed a backend because we kept getting 405 error. So, we'll use firebase
-    <!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
-
-<script>
-  // Our actual Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
-    authDomain: "serene-interface.firebaseapp.com",
-    projectId: "serene-interface",
-    storageBucket: "serene-interface.firebasestorage.app",
-    messagingSenderId: "877337255174",
-    appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
-  };
-
-  // Initialize Firebase
-    
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  function signup() {
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("CP").value;
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
-    auth.createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        alert("Signup successful!");
-        window.location.href = "login.html"; // redirect is successful 
-      })
-      .catch(error => {
-        alert("Error: " + error.message);
-      });
-  }
-</script>
-    
 </body>
     
 </html>
