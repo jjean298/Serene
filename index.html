@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Serene</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/SidebarMenu/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
   <!--INTERNAL CSS-->
   <style>
@@ -120,13 +118,97 @@
       width: 80%;
       max-width: 300px;
     }
+
+    .sidenav {
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  padding-top: 65px;
+  position: fixed;
+  transition: all .5s ease;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 999;
+}
+.sidenav a {
+  display: block;
+  padding: 25px 0 25px 30px;
+  color: #fff;
+  font-size: 15px;
+}
+.sidenav a:hover {
+  color: #333;
+  background-color: #fff;
+  font-weight: bold;
+  border-right: 2px solid #ffffff;
+}
+.sidenav .fa {
+  display: inline-block;
+}
+.single-nav {
+  border-bottom: 1px solid #fff;
+}
+#icon {
+  display: none;
+}
+label #openbtn, label #closebtn {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1000;
+}
+label #openbtn {
+  top: 20px;
+  left: 70px;
+  font-size: 40px;
+  background-color: #333;
+  padding: 10px;
+  color: #fff;
+}
+label #closebtn {
+  top: 20px;
+  left: -212px;
+  font-size: 30px;
+}
+#icon:checked~.sidenav {
+  left: 0;
+}
+#icon:checked~label #closebtn {
+  left: 212px;
+  color: #fff;
+}
+#icon:checked~label #openbtn {
+  left: 170px;
+  opacity: 0;
+}
     </style>
     <!--END OF INTERNAL CSS-->
 
 </head>
 <body>
 
-  <div id="sidebar-container"></div>
+  <header>
+    <input type="checkbox" id="icon" />
+    <label for="icon" class="iconbtn">
+      <i class="fa fa-times" id="closebtn"></i>
+      <i class="fa fa-bars" id="openbtn"></i>
+    </label>
+  
+    <div class="sidenav">
+      <div class="logo">
+        <img src="S.png" alt="Logo" />
+      </div>
+      <ul class="mainNav">
+        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>Home</span></a></li>
+        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>About</span></a></li>
+        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>Services</span></a></li>
+        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>Portfolio</span></a></li>
+        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>Blog</span></a></li>
+        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>Contact</span></a></li>
+      </ul>
+    </div>
+  </header>
 
   <div class="hero">
     <a href="index.html">
@@ -157,6 +239,5 @@
     </div>
   </div>
 
-  <script src="/SidebarMenu/script.js"></script>
 </body>
 </html>
