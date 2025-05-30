@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Meditation - Serene</title>
+  <style>
+    body {
+      font-family: 'Lora', serif;
+      background: url("meditation.jpg.avif") no-repeat center center fixed;;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #d1c4e9;
+      color: #4a148c;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    nav {
+      background: #e6dff2;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: #4a148c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .meditation-option {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      width: 280px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .meditation-option h3 {
+      margin-top: 0;
+      color: #6a1b9a;
+    }
+
+    .meditation-option p {
+      color: #4e4e4e;
+    }
+
+    .meditation-option button {
+      background-color: #b39ddb;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    .meditation-option button:hover {
+      background-color: #9e91c8;
+    }
+
+    .logo {
+      max-width: 120px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html">
+      <img src="SereneLogo.PNG" alt="Serene Logo" class="logo" />
+    </a>
+    <br><br>
+    <h1>Choose Your Meditation</h1>
+  </header>
+
+  <main>
+    <div class="meditation-option">
+      <h3>Calm Breathing</h3>
+      <p>Slow down and center yourself with focused breathing.</p>
+      <button onclick="alert('Starting Calm Breathing...')">Start</button>
+    </div>
+    <div class="meditation-option">
+      <h3>Gratitude</h3>
+      <p>Reflect on the positive things in your life.</p>
+      <button onclick="alert('Starting Gratitude Meditation...')">Start</button>
+    </div>
+    <div class="meditation-option">
+      <h3>Sleep Aid</h3>
+      <p>Wind down with calming thoughts and sounds.</p>
+      <button onclick="alert('Starting Sleep Meditation...')">Start</button>
+    </div>
+  </main>
+</body>
+</html>
