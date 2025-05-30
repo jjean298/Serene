@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width", intial-scale="1.0">
-    <title>Register</title>
+    <title>Premium subscription</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
   <style>
 
    * {
       margin: 0;
+      padding: 0;
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
@@ -34,7 +35,7 @@
     }
       
     .glass-container {
-      width: 300px;
+        width: 100px;
         height: auto;
         position: relative;
         z-index: 1;
@@ -119,25 +120,38 @@
   </a>
 
   <div class="glass-container">
-      <div class="col-1">
-        <h2>Sign Up for Premium</h2>
-          <form>
-            <label for="silver">
-              <input type="radio" name"options" id="silver">
-                <span> $4.99/month </span>
-            </label>
+    <h2>Sign Up for Premium</h2>
+      <div class="row">
+        <div class="col">
+          <p> Silver </p>
+          <h3> $4.99 /month </h3>
+            <ul>
+                <li>No Ads</li>
+                <li>Exclusive exercises</li>
+            </ul>
+       </div>
 
-            <label for="gold">
-              <input type="radio" name"options" id="gold">
-                <span> $9.99/month </span>
-            </label>
+ <div class="col">
+          <p> Gold </p>
+          <h3> $9.99 /month </h3>
+            <ul>
+                <li>No ads</li>
+                <li>Exclusive Exercises</li>
+                <li>Free coaching lessons</li>
+            </ul>
+       </div>
 
-            <label for="diamond">
-              <input type="radio" name"options" id="diamond">
-                <span> $19.99/month </span>
-            </label>
-    
-          </form>
+ <div class="col">
+          <p> Diamond </p>
+          <h3> $19.99 /month </h3>
+            <ul>
+                <li>No ads</li>
+                <li>Full access to Seren Library</li>
+                <li>Offline mode</li>
+                <li>Live meditation session with trainer</li>
+            </ul>
+       </div>
+          
      </div>
   </div>
 </body>
