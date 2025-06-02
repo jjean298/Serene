@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Serene</title>
+
+  <!-- Fonts and Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <!-- External Sidebar CSS and Script -->
+  <link rel="stylesheet" href="sidebar.css">
+  <script src="load-sidebar.js" defer></script>
 
-  <!--INTERNAL CSS-->
+  <!-- Internal Styles -->
   <style>
     * {
       margin: 0;
@@ -61,29 +66,29 @@
     }
 
     .info-row {
-  display: flex;
-  justify-content: center;
-  gap: 5rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;  
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
     }
 
     .info-item {
-  text-align: center;
-  max-width: 200px;
+      text-align: center;
+      max-width: 200px;
     }
 
     .info-title {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 0.5rem;
     }
 
-.info-desc {
-  font-size: 0.9rem;
-  color: #777;
-}
+    .info-desc {
+      font-size: 0.9rem;
+      color: #777;
+    }
 
     h1 {
       font-size: 2rem;
@@ -121,119 +126,16 @@
       width: 80%;
       max-width: 300px;
     }
-
-    .sidenav {
-  left: -250px;
-  width: 250px;
-  height: 100vh;
-  padding-top: 65px;
-  position: fixed;
-  transition: all .5s ease;
-  background-color: rgba(254, 189, 247, 0.451);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  z-index: 999;
-}
-
-.sidenav .logo {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sidenav .logo img {
-  width: 75px;
-  height: auto;
-}
-
-.sidenav a {
-  display: block;
-  padding: 25px 0 25px 30px;
-  color: #000;
-  font-size: 15px;
-}
-.sidenav a:hover {
-  color: #000;
-  background-color: rgba(255, 255, 255, 0.6);
-  font-weight: bold;
-  border-right: 2px solid #000;
-}
-.sidenav .fa {
-  display: inline-block;
-}
-.single-nav {
-  border-bottom: 1px solid #000;
-}
-#icon {
-  display: none;
-}
-label #openbtn, label #closebtn {
-  position: absolute;
-  cursor: pointer;
-  z-index: 1000;
-}
-label #openbtn {
-  top: 20px;
-  left: 40px;
-  font-size: 15px;
-  background-color: #fa9def;
-  opacity: 80%;
-  padding: 10px;
-  color: #fff;
-}
-label #closebtn {
-  top: 20px;
-  left: -212px;
-  font-size: 15px;
-}
-#icon:checked~.sidenav {
-  left: 0;
-}
-#icon:checked~label #closebtn {
-  left: 200px;
-  color: white;
-  background-color: #fa9def;
-  opacity: 80%;
-  padding: 10px;
-  border-radius: 50%;
-}
-#icon:checked~label #openbtn {
-  left: 170px;
-  opacity: 0;
-}
-    </style>
-    <!--END OF INTERNAL CSS-->
-
+  </style>
 </head>
 <body>
 
-  <header>
-    <input type="checkbox" id="icon" />
-    <label for="icon" class="iconbtn">
-      <i class="fa fa-times" id="closebtn"></i>
-      <i class="fa fa-bars" id="openbtn"></i>
-    </label>
-  
-    <div class="sidenav">
-      <div class="logo">
-        <img src="SereneS.png" alt="Logo" />
-      </div>
-      <ul class="mainNav">
-        <li class="single-nav"><a href="https://haroldluis09.github.io/index.html"><i class="fa fa-chevron-right"></i><span>Home</span></a></li>
-        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>About</span></a></li>
-        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>Hydration</span></a></li>
-        <li class="single-nav"><a href="https://haroldluis09.github.io/meditation.html"><i class="fa fa-chevron-right"></i><span>Meditation</span></a></li>
-        <li class="single-nav"><a href="#"><i class="fa fa-chevron-right"></i><span>Daily Journal</span></a></li>
-        <li class="single-nav"><a href="https://haroldluis09.github.io/premium.html"><i class="fa fa-chevron-right"></i><span>Serene Premium</span></a></li>
-      </ul>
-    </div>
-  </header>
+  <!-- Sidebar will load here -->
+  <div id="sidebar-container"></div>
 
   <div class="hero">
     <a href="index.html">
-    <img src="SereneLogo.PNG" alt="Serene Logo" class="logo" />
+      <img src="SereneLogo.PNG" alt="Serene Logo" class="logo" />
     </a>
     <div class="overlay"></div>
   </div>
