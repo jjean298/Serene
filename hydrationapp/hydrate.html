@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hydration</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
 
+        <!--MAIN SECTION START-->
+        <div class="container">
+            <h1>Serene Hydration</h1>
+            <div class="input-container">
+                <label for="amount">Enter amount of water (in mL)</label>
+                <div class="input-group">
+                    <input type="number" id="amount" placeholder="Enter Amount" />
+                    <button onclick="addWater()">Add</button>
+                </div>
+            </div>
+            <div class="summary">
+               <h2>Today's Water Intake: <span id="total">0</span></h2> 
+            </div>
+            <div class="history">
+                <h2>Water Intake History</h2>
+                <ul id="history-list"></ul>
+            </div>
+        </div>
+        <!--MAIN SECTION ENDS-->
+
+    <script src="script.js"></script>
+    </body>
+</html>
