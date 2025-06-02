@@ -1,0 +1,35 @@
+<!-- used to write data to database, havent tested yet --> 
+
+<!--
+import {initializeApp} from "firebase/app";
+import {getDatabase, ref, set} from "firebase/database";
+-->
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
+  authDomain: "serene-interface.firebaseapp.com",
+  projectId: "serene-interface",
+  storageBucket: "serene-interface.firebasestorage.app",
+  messagingSenderId: "877337255174",
+  appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
+};
+
+const app = initializeApp(firebaseConfig); // initializes firebase
+
+function writeUserData(userId, username, email, password){ // writes data into database
+  const db = getDatabase();
+  const reference = ref(db, 'users/' + userId);
+
+  set(reference, {
+    username: username,
+    email: email,
+    password: password
+  });
+}
+</script>
+
