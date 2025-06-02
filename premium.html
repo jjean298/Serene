@@ -25,14 +25,14 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         border_radius: 10px;
         border: 1px solid #fff;
-        padding 30px 20px;
+        padding: 30px 20px;
     }
 
     .glass-container h2{
         color: #fff;
         font-size: 32px;
         padding: 50px 0;
-        text-align:center
+        text-align: center;
     }
 
     .row {
@@ -71,7 +71,33 @@
 
     .col ul li{
         margin: 15px 0;
-    }    
+    }
+
+
+    .col ul li::before{
+        content: '\2022';
+        color: #e33058;
+        font-weight: bold;
+        margin-right: 8px;
+    }
+
+    .col button{
+        width: 100%;
+        padding: 14px 0;
+        background: transparent;
+        color: #fff;
+        font-size: 15px;
+        border: 1px solid #e33058;
+        border-radius: 6px;
+        margin-top: 30px;
+        cursor: pointer;
+        transition: background 0.5s;
+    }
+
+    .col button:hover{
+        background: #e33058;
+        
+    }
 
     </style>
   </head>
@@ -91,6 +117,7 @@
                 <li>No Ads</li>
                 <li>Exclusive exercises</li>
             </ul>
+            <button> Select </button>
        </div>
 
  <div class="col">
@@ -101,6 +128,7 @@
                 <li>Exclusive Exercises</li>
                 <li>Free coaching lessons</li>
             </ul>
+          <button> Select </button>
        </div>
 
  <div class="col">
@@ -112,6 +140,7 @@
                 <li>Offline mode</li>
                 <li>Live meditation session with trainer</li>
             </ul>
+         <button> Select </button>
        </div>
           
      </div>
