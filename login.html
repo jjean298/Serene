@@ -162,14 +162,14 @@
       z-index: 9999;
     }
 
-    .sidenav .logo {
+    .sidebar-logo {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin:30px 0;
+      margin: 30px 0;
     }
 
-    .sidenav .logo img {
+    .sidebar-logo img {
       width: 75px;
       height: auto;
     }
@@ -247,7 +247,6 @@
       pointer-events: none;
     }
   </style>
-  <!--END OF SIDEBAR-->
 </head>
 
 <body>
@@ -258,39 +257,27 @@
 
   <!-- Sidebar -->
   <div class="sidenav">
-    <div class="logo">
-      <img src="SereneS.png" alt="Logo" />
+    <div class="sidebar-logo">
+      <img src="SereneS.png" alt="Sidebar Logo" />
     </div>
     <ul class="mainNav">
       <li class="single-nav">
-        <a href="https://haroldluis09.github.io/index.html"
-          ><i class="fa fa-chevron-right"></i><span>Home</span></a
-        >
+        <a href="https://haroldluis09.github.io/index.html"><i class="fa fa-chevron-right"></i><span>Home</span></a>
       </li>
       <li class="single-nav">
-        <a href="#"
-          ><i class="fa fa-chevron-right"></i><span>About</span></a
-        >
+        <a href="#"><i class="fa fa-chevron-right"></i><span>About</span></a>
       </li>
       <li class="single-nav">
-        <a href="#"
-          ><i class="fa fa-chevron-right"></i><span>Hydration</span></a
-        >
+        <a href="#"><i class="fa fa-chevron-right"></i><span>Hydration</span></a>
       </li>
       <li class="single-nav">
-        <a href="https://haroldluis09.github.io/meditation.html"
-          ><i class="fa fa-chevron-right"></i><span>Meditation</span></a
-        >
+        <a href="https://haroldluis09.github.io/meditation.html"><i class="fa fa-chevron-right"></i><span>Meditation</span></a>
       </li>
       <li class="single-nav">
-        <a href="#"
-          ><i class="fa fa-chevron-right"></i><span>Daily Journal</span></a
-        >
+        <a href="#"><i class="fa fa-chevron-right"></i><span>Daily Journal</span></a>
       </li>
       <li class="single-nav">
-        <a href="https://haroldluis09.github.io/premium.html"
-          ><i class="fa fa-chevron-right"></i><span>Serene Premium</span></a
-        >
+        <a href="https://haroldluis09.github.io/premium.html"><i class="fa fa-chevron-right"></i><span>Serene Premium</span></a>
       </li>
     </ul>
   </div>
@@ -304,14 +291,7 @@
       <h2>Login</h2>
       <form action="#" method="POST">
         <input type="text" id="username" name="username" required placeholder="Username" />
-
-        <input
-          type="password"
-          id="password"
-          name="password"
-          required
-          placeholder="Password"
-        />
+        <input type="password" id="password" name="password" required placeholder="Password" />
 
         <div class="options">
           <input type="checkbox" id="remember" name="remember" />
@@ -321,10 +301,7 @@
 
         <button type="submit">Login</button>
 
-        <p>
-          Don't have an account?
-          <a href="#" id="register">Register</a>
-        </p>
+        <p>Don't have an account? <a href="#" id="register">Register</a></p>
       </form>
     </div>
   </div>
