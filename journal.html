@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Journal - Serene</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Lora, serif;
+      background: linear-gradient(to bottom right, #fce4ec, #f8bbd0, #e1bee7, #ede7f6);
+      margin: 0;
+      padding: 0;
+      color: #4e4e4e;
+    }
+
+    header {
+      background: transparent;
+      text-align: center;
+      padding: 2rem;
+      color: #6a1b9a;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    label, textarea, select {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      font-size: 1rem;
+    }
+
+    textarea {
+      height: 200px;
+      padding: 1rem;
+      border-radius: 8px;
+      border: none;
+      resize: vertical;
+      font-family: Lora, serif;
+    }
+
+    select {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #ce93d8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #ba68c8;
+    }
+
+    .history-section {
+      margin-top: 3rem;
+    }
+
+    .history-section h2 {
+      font-size: 1.2rem;
+      color: #6a1b9a;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .entry-preview {
+      margin-top: 1rem;
+      background-color: rgba(255,255,255,0.6);
+      border-radius: 8px;
+      padding: 1rem;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+  <img src="SereneS.png" alt="Serene Logo" style="position: absolute; top: 20px; right: 20px; width: 60px;" />
+  <h1>Daily Journal</h1>
+</header>
+
+
+  <main>
+    <label for="mood">How are you feeling today?</label>
+    <select id="mood">
+      <option>😊 Happy</option>
+      <option>😐 Neutral</option>
+      <option>😔 Sad</option>
+      <option>😰 Anxious</option>
+      <option>😴 Tired</option>
+    </select>
+
+    <label for="entry">Write your thoughts:</label>
+    <textarea id="entry" placeholder="Start feeling serene..."></textarea>
+
+    <button onclick="saveEntry()">Save</button>
+
+    <div class="history-section">
+      <h2>Previous Entries</h2>
+      <label for="pastEntries">Select a date:</label>
+      <select id="pastEntries" onchange="loadEntry()">
+        <option value="">-- Choose a date --</option>
+      </select>
+      <div id="entryPreview" class="entry-preview" style="display:none;"></div>
+    </div>
+  </main>
+
+  <script>
+    // Load saved keys on page load
+    window.onload = function () {
+      const pastEntries = document.getElementById("pastEntries");
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith("journal-")) {
+          const date = key.replace("journal-", "");
+          const option = document.createElement("option");
+          option.value = key;
+          option.text = date;
+          pastEntries.appendChild(option);
+        }
+      }
+    };
+
+    function saveEntry() {
+      const entry = document.getElementById("entry").value;
+      const date = new Date().toISOString().split("T")[0];
+      if (entry.trim() !== "") {
+        localStorage.setItem("journal-" + date, entry);
+        alert("Your journal entry has been saved!");
+
+        // Add to dropdown if not already there
+        const pastEntries = document.getElementById("pastEntries");
+        if (![...pastEntries.options].some(opt => opt.value === "journal-" + date)) {
+          const option = document.createElement("option");
+          option.value = "journal-" + date;
+          option.text = date;
+          pastEntries.appendChild(option);
+        }
+
+        document.getElementById("entry").value = "";
+      } else {
+        alert("Please write something first.");
+      }
+    }
+
+    function loadEntry() {
+      const selectedKey = document.getElementById("pastEntries").value;
+      const preview = document.getElementById("entryPreview");
+      const entry = localStorage.getItem(selectedKey);
+      if (entry) {
+        preview.textContent = entry;
+        preview.style.display = "block";
+      } else {
+        preview.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
