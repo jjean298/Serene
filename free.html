@@ -336,4 +336,49 @@
     </div>
   </div>
 </body>
+
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
+    authDomain: "serene-interface.firebaseapp.com",
+    databaseURL: "https://serene-interface-default-rtdb.firebaseio.com",
+    projectId: "serene-interface",
+    storageBucket: "serene-interface.appspot.com",
+    messagingSenderId: "877337255174",
+    appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  const form = document.querySelector('form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    firebase.database().ref('signups').push({
+      email: email,
+      username: username,
+      password: password,
+      timestamp: Date.now()
+    }).then(() => {
+      alert("Signup successful!");
+      form.reset();
+    }).catch((error) => {
+      console.error("Error saving data:", error);
+    });
+  });
+</script>
 </html>
