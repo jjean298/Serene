@@ -350,21 +350,7 @@
     appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
   };
 
-  firebase.initializeApp(firebaseConfig);
-  const auth = firebase.auth();
-
-  function login() {
-    const email = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    auth.signInWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        alert("Login successful!");
-        window.location.href = "dashboard.html"; // we'll call is dashboard html
-      })
-      .catch(error => {
-        alert("Login failed: " + error.message);
-      });
+ 
   }
 </script>
 </body>
