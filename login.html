@@ -289,7 +289,7 @@
   <div class="glass-container">
     <div class="login-box">
       <h2>Login</h2>
-      <form action="dashboard.html" method="GET">
+      <form id="login-form">
         <input type="text" id="username" name="username" required placeholder="Username" />
         <input type="password" id="password" name="password" required placeholder="Password" />
 
@@ -310,6 +310,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
 
 <script>
+  document.getElementById("login-form").addEventListener("submit", function(e) {
+    e.preventDefault(); //trying to fix security issue
   const firebaseConfig = {
     apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
     authDomain: "serene-interface.firebaseapp.com",
