@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Serene Dashboard</title>
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -263,7 +266,7 @@
     </div>
   </div>
 
- <!-- Firebase SDKs -->
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
 
@@ -298,17 +301,27 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
+    // Auth guard and restore on bfcache
     auth.onAuthStateChanged(user => {
       if (!user) {
-        window.location.href = "index.html";
+        window.location.replace("login.html");
       } else {
         document.getElementById("userEmail").textContent = user.email;
       }
     });
 
+    window.addEventListener("pageshow", (e) => {
+      if (e.persisted) {
+        // if page was restored from bfcache, re-check
+        if (!auth.currentUser) {
+          window.location.replace("login.html");
+        }
+      }
+    });
+
     function logout() {
       auth.signOut().then(() => {
-        window.location.href = "login.html";
+        window.location.replace("login.html");
       });
     }
 
@@ -329,8 +342,7 @@
     const muteBtn = document.getElementById('muteBtn');
 
     hummingAudio.volume = 0.5;
-    // Try to play; if blocked by autoplay policy, fallback silently and rely on user toggle
-    hummingAudio.play().catch(() => {});
+    hummingAudio.play().catch(() => {}); // attempt play
 
     muteBtn.addEventListener('click', () => {
       if (hummingAudio.muted) {
