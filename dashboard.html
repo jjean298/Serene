@@ -306,30 +306,43 @@
       }
     }
 
-    // Humming sound mute toggle
-    const hummingAudio = document.createElement('audio');
-    hummingAudio.src = 'humming.mp3';
-    hummingAudio.loop = true;
-    hummingAudio.autoplay = true;
-    hummingAudio.volume = 0.3; // Optional: start at lower volume
-    hummingAudio.muted = false;
-    document.body.appendChild(hummingAudio);
+    <!-- Audio Player -->
+<audio id="hummingAudio" src="humming.mp3" loop autoplay></audio>
 
-    const muteBtn = document.createElement('button');
-    muteBtn.id = 'muteBtn';
-    muteBtn.textContent = '🔊';
-    document.body.appendChild(muteBtn);
+<!-- Mute Button -->
+<button id="muteBtn" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background: #6c5ce7;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  z-index: 9999;
+  user-select: none;
+">🔊</button>
 
-    muteBtn.addEventListener('click', () => {
-      if (hummingAudio.muted) {
-        hummingAudio.muted = false;
-        muteBtn.textContent = "🔊";
-      } else {
-        hummingAudio.muted = true;
-        muteBtn.textContent = "🔇";
-      }
-    });
-  </script>
+<script>
+  const hummingAudio = document.getElementById('hummingAudio');
+  const muteBtn = document.getElementById('muteBtn');
 
+  // Set audio volume and play immediately
+  hummingAudio.volume = 0.5;
+  hummingAudio.play();
+
+  muteBtn.addEventListener('click', () => {
+    if (hummingAudio.muted) {
+      hummingAudio.muted = false;
+      muteBtn.textContent = '🔊';
+    } else {
+      hummingAudio.muted = true;
+      muteBtn.textContent = '🔇';
+    }
+  });
+</script>
 </body>
 </html>
