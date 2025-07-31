@@ -25,10 +25,12 @@
     }
 
     .logo {
-      max-width: 140px;
+      width: 100%;
+      max-width: 200px;
       height: auto;
       display: block;
-      margin: 0 auto 25px;
+      margin: -10; 
+      padding: 10px;
     }
 
     .glass-container {
@@ -38,7 +40,7 @@
       backdrop-filter: blur(8px);
       box-shadow: 0 16px 40px rgba(31, 38, 135, 0.1);
       border-radius: 16px;
-      border: 1px solid rgba(216, 196, 240, 0.8);
+      border: 5px solid rgba(216, 196, 240, 0.8);
       padding: 35px 25px 50px;
       position: relative;
     }
@@ -142,16 +144,15 @@
     .featured::before {
       content: "Most Popular";
       position: absolute;
-      top: 10px;
-      right: -4px;
+      top: 0px;
+      right: -10px;
       background: #b5838d;
       color: white;
       padding: 6px 12px;
       font-size: 10px;
       font-weight: 700;
-      border-radius: 8px;
+      border-radius: 6px;
       letter-spacing: 1px;
-      transform: rotate(10deg);
     }
 
     @media (max-width: 800px) {
