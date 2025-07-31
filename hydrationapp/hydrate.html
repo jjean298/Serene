@@ -123,6 +123,12 @@
       cursor: pointer;
       z-index: 10;
     }
+
+    .status-line {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #555;
+    }
   </style>
 </head>
 <body>
@@ -136,15 +142,15 @@
     Your browser does not support the audio element.
   </audio>
 
-  <!--MAIN SECTION START-->
   <div class="container">
     <h1>Serene Hydration</h1>
+    <p class="status-line">Logged in as <span id="user-email">...</span></p>
 
     <div class="input-container">
       <label for="amount">Enter amount of water (in oz)</label>
       <div class="input-group">
         <input type="number" id="amount" placeholder="e.g. 8" min="0" step="0.1" />
-        <button onclick="addWater()">Add</button>
+        <button id="add-btn" onclick="addWater()">Add</button>
       </div>
     </div>
 
@@ -160,27 +166,96 @@
       </div>
     </div>
   </div>
-  <!--MAIN SECTION ENDS-->
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore-compat.js"></script>
 
   <script>
-    let total = 0;
-    const totalDisplay = document.getElementById('total');
-    const historyList = document.getElementById('history-list');
+    // Firebase config (same as dashboard)
+    const firebaseConfig = {
+      apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
+      authDomain: "serene-interface.firebaseapp.com",
+      projectId: "serene-interface",
+      storageBucket: "serene-interface.firebasestorage.app",
+      messagingSenderId: "877337255174",
+      appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // helpers
+    function getTodayKey() {
+      const d = new Date();
+      return d.toISOString().slice(0,10); // YYYY-MM-DD
+    }
+
+    // state
+    let dayDocRef = null;
+    let dayData = { entries: [], total: 0 };
+
+    // auth guard + load
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html";
+        return;
+      }
+      document.getElementById("user-email").textContent = user.email;
+      const today = getTodayKey();
+      dayDocRef = db.collection('users').doc(user.uid).collection('hydration').doc(today);
+
+      // load today's data
+      dayDocRef.get().then(doc => {
+        if (doc.exists) {
+          const data = doc.data();
+          dayData.entries = Array.isArray(data.entries) ? data.entries : [];
+          dayData.total = typeof data.total === 'number' ? data.total : 0;
+        }
+        render(dayData);
+      }).catch(err => {
+        console.error("Failed to load hydration data:", err);
+        render(dayData);
+      });
+    });
+
+    function render(day) {
+      document.getElementById('total').textContent = day.total.toFixed(1);
+      const list = document.getElementById('history-list');
+      list.innerHTML = '';
+      day.entries.forEach(e => {
+        const li = document.createElement('li');
+        li.textContent = `${e.toFixed(1)} oz added`;
+        list.appendChild(li);
+      });
+    }
 
     function addWater() {
       const input = document.getElementById('amount');
       const amount = parseFloat(input.value);
-
-      if (!isNaN(amount) && amount > 0) {
-        total += amount;
-        totalDisplay.textContent = total.toFixed(1);
-        const li = document.createElement('li');
-        li.textContent = `${amount.toFixed(1)} oz added`;
-        historyList.prepend(li);
-        input.value = '';
-      } else {
+      if (isNaN(amount) || amount <= 0) {
         alert('Please enter a valid amount.');
+        return;
       }
+
+      // Update local state
+      dayData.entries.unshift(amount);
+      dayData.total = parseFloat((dayData.total + amount).toFixed(1));
+      render(dayData);
+
+      // Persist to Firestore (create or merge)
+      if (dayDocRef) {
+        dayDocRef.set({
+          entries: dayData.entries,
+          total: dayData.total,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true }).catch(err => {
+          console.error("Failed to save hydration entry:", err);
+        });
+      }
+
+      input.value = '';
     }
 
     function toggleAudio() {
@@ -194,7 +269,11 @@
         btn.textContent = '🔇';
       }
     }
-  </script>
 
+    // attempt autoplay with audio (some browsers may still require interaction)
+    const waterfall = document.getElementById('waterfall-audio');
+    waterfall.volume = 0.5;
+    waterfall.play().catch(() => {});
+  </script>
 </body>
 </html>
