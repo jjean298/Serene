@@ -182,3 +182,87 @@
     <img src="https://i.imgur.com/0y0y0y0.png" alt="Profile" />
     <div class="email" id="userEmail">Loading...</div>
     <div class="status">🌟 Premium</div>
+     <button onclick="logout()">Log Out</button>
+  </div>
+
+  <div class="container">
+    <h2>Welcome Back 🌸</h2>
+    <p>Your space for reflection, peace, and progress.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">📝</div>
+        <h3>Journaling</h3>
+        <p>Capture your thoughts and track your growth.</p>
+        <button onclick="location.href='journaling.html'">Open</button>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🧘‍♀️</div>
+        <h3>Meditation</h3>
+        <p>Center yourself with peaceful sessions.</p>
+        <button onclick="location.href='meditation.html'">Open</button>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">💧</div>
+        <h3>Hydration</h3>
+        <p>Keep track of your water intake daily.</p>
+        <button onclick="location.href='hydrate.html'">Open</button>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🌟</div>
+        <h3>Premium</h3>
+        <p>Explore exclusive member-only features.</p>
+        <button onclick="location.href='premium.html'">Explore</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
+      authDomain: "serene-interface.firebaseapp.com",
+      projectId: "serene-interface",
+      storageBucket: "serene-interface.firebasestorage.app",
+      messagingSenderId: "877337255174",
+      appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    auth.onAuthStateChanged(user => {
+      if (!user) {
+        window.location.href = "login.html";
+      } else {
+        document.getElementById("userEmail").textContent = user.email;
+      }
+    });
+
+    function logout() {
+      auth.signOut().then(() => {
+        window.location.href = "login.html";
+      });
+    }
+
+    function toggleAccount() {
+      const modal = document.getElementById('accountModal');
+      modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+    }
+
+    window.onclick = function(e) {
+      const modal = document.getElementById('accountModal');
+      if (e.target !== modal && !modal.contains(e.target) && e.target.innerText !== "⚙️") {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+
+</body>
+</html>
