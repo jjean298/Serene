@@ -310,8 +310,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
 
 <script>
-  document.getElementById("login-form").addEventListener("submit", function(e) {
-    e.preventDefault(); //trying to fix security issue
+  //Initializing Firebase once
   const firebaseConfig = {
     apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
     authDomain: "serene-interface.firebaseapp.com",
@@ -323,7 +322,9 @@
 
   firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
-
+//Adding Submit handler
+  document.getElementById("login-form").addEventListener("submit", function(e) {
+    e.preventDefault(); //trying to fix url leak
   function login() {
     const email = document.getElementById("username").value;
     const password = document.getElementById("password").value;
@@ -336,23 +337,6 @@
       .catch(error => {
         alert("Login failed: " + error.message);
       });
-  }
-</script>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
-
-<script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
-    authDomain: "serene-interface.firebaseapp.com",
-    projectId: "serene-interface",
-    storageBucket: "serene-interface.firebasestorage.app",
-    messagingSenderId: "877337255174",
-    appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
-  };
-
- 
   }
 </script>
 </body>
