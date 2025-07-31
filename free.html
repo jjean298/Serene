@@ -335,22 +335,55 @@
       </form>
     </div>
   </div>
+
+<!-- 1. Load Firebase SDKs first -->
+
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+ <!-- 2. Then initialize and use Firebase -->
   <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
+    authDomain: "serene-interface.firebaseapp.com",
+    projectId: "serene-interface",
+    storageBucket: "serene-interface.appspot.com",
+    messagingSenderId: "877337255174",
+    appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
+  };
+//initialize before calling auth
+     firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
+    
   document.getElementById("signup-form").addEventListener("submit", function (e) {
     e.preventDefault();
     const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirm-password").value;
     auth.createUserWithEmailAndPassword(email, password)
-      .then(userCredential => {
-        alert("Signup successful!");
-        window.location.href = "login.html";
-      })
-      .catch(error => {
-        alert("Signup failed: " + error.message);
-      });
-  });
-</script>
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+      }
 
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(userCredential => {
+          // Store the custom username in Firestore under 'users' collection
+          const user = userCredential.user;
+          return db.collection("users").doc(user.uid).set({
+            email: email,
+            username: username,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        })
+        .then(() => {
+          alert("Signup successful!");
+          window.location.href = "login.html";
+        })
+        .catch(error => {
+          alert("Signup failed: " + error.message);
+        });
+    });
+  </script>
 </body>
 </html>
