@@ -124,7 +124,7 @@
       display: none;
       min-width: 220px;
       z-index: 10;
-      text-align: left;
+      text-align: center;
     }
 
     #accountModal img {
@@ -158,6 +158,27 @@
       cursor: pointer;
     }
 
+    #muteBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      background: var(--primary);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      transition: background 0.3s ease;
+      z-index: 9999;
+      user-select: none;
+    }
+
+    #muteBtn:hover {
+      background: var(--accent);
+    }
+
     @media (max-width: 600px) {
       nav a {
         margin-left: 12px;
@@ -169,28 +190,29 @@
 
   <header>
     <a href="index.html" style="display: flex; align-items: center;">
-  <img src="SereneLogo.PNG" alt="Serene Logo" style="height: 49px; transform: scale(4.2) translateX(10px); transform-origin: center;" />
-</a>
+      <img src="SereneLogo.PNG" alt="Serene Logo" style="height: 49px; transform: scale(4.2) translateX(10px); transform-origin: center;" />
+    </a>
     <nav>
       <a href="journal.html">Journaling</a>
       <a href="meditation.html">Meditation</a>
       <a href="hydrationapp/hydrate.html">Hydrate</a>
+      <a href="digitaldetox.html">Digital Detox</a>
+      <a href="stretch.html">Stretch</a>
       <a href="premium.html">Premium</a>
       <a href="#" onclick="toggleAccount()">⚙️</a>
     </nav>
   </header>
 
   <div id="accountModal" style="text-align: center; padding: 20px;">
-  <img 
-    src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" 
-    alt="Profile Icon" 
-    style="width: 70px; height: 70px; border-radius: 50%; margin-bottom: 10px;"
-  />
-   <div class="email" id="userEmail">Loading...</div>
+    <img 
+      src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" 
+      alt="Profile Icon" 
+      style="width: 70px; height: 70px; border-radius: 50%; margin-bottom: 10px;"
+    />
+    <div class="email" id="userEmail">Loading...</div>
     <div class="status">🌟 Premium Status</div>
-     <button onclick="logout()">Log Out</button>
+    <button onclick="logout()">Log Out</button>
   </div>
-
 
   <div class="container">
     <h2>Welcome Back 🌸</h2>
@@ -219,6 +241,20 @@
       </div>
 
       <div class="card">
+        <div class="card-icon">🌿</div>
+        <h3>Digital Detox</h3>
+        <p>Take a break from screens and refresh your mind.</p>
+        <button onclick="location.href='digitaldetox.html'">Open</button>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🧘‍♂️</div>
+        <h3>Stretch</h3>
+        <p>Follow gentle stretching routines for relaxation.</p>
+        <button onclick="location.href='stretch.html'">Open</button>
+      </div>
+
+      <div class="card">
         <div class="card-icon">🌟</div>
         <h3>Premium</h3>
         <p>Explore exclusive member-only features.</p>
@@ -229,8 +265,7 @@
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
-
+  <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
 
   <script>
     const firebaseConfig = {
@@ -261,7 +296,7 @@
 
     function toggleAccount() {
       const modal = document.getElementById('accountModal');
-      modal.style.display = modal.style.display === 'none' ? 'block' : 'none';
+      modal.style.display = modal.style.display === 'none' || modal.style.display === '' ? 'block' : 'none';
     }
 
     window.onclick = function(e) {
@@ -270,6 +305,30 @@
         modal.style.display = "none";
       }
     }
+
+    // Humming sound mute toggle
+    const hummingAudio = document.createElement('audio');
+    hummingAudio.src = 'humming.mp3';
+    hummingAudio.loop = true;
+    hummingAudio.autoplay = true;
+    hummingAudio.volume = 0.3; // Optional: start at lower volume
+    hummingAudio.muted = false;
+    document.body.appendChild(hummingAudio);
+
+    const muteBtn = document.createElement('button');
+    muteBtn.id = 'muteBtn';
+    muteBtn.textContent = '🔊';
+    document.body.appendChild(muteBtn);
+
+    muteBtn.addEventListener('click', () => {
+      if (hummingAudio.muted) {
+        hummingAudio.muted = false;
+        muteBtn.textContent = "🔊";
+      } else {
+        hummingAudio.muted = true;
+        muteBtn.textContent = "🔇";
+      }
+    });
   </script>
 
 </body>
