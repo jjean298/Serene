@@ -263,11 +263,30 @@
     </div>
   </div>
 
-  <!-- Firebase SDKs -->
+ <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
 
+  <!-- Audio Player (outside any other <script>) -->
+  <audio id="hummingAudio" src="humming.mp3" loop autoplay></audio>
+  <button id="muteBtn" aria-label="Mute/unmute" style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    background: #6c5ce7;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    z-index: 9999;
+    user-select: none;
+  ">🔊</button>
+
   <script>
+    // Firebase init
     const firebaseConfig = {
       apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
       authDomain: "serene-interface.firebaseapp.com",
@@ -276,7 +295,6 @@
       messagingSenderId: "877337255174",
       appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
     };
-
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
 
@@ -306,43 +324,23 @@
       }
     }
 
-    <!-- Audio Player -->
-<audio id="hummingAudio" src="humming.mp3" loop autoplay></audio>
+    // Humming audio control
+    const hummingAudio = document.getElementById('hummingAudio');
+    const muteBtn = document.getElementById('muteBtn');
 
-<!-- Mute Button -->
-<button id="muteBtn" style="
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 15px;
-  background: #6c5ce7;
-  border: none;
-  border-radius: 50px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  z-index: 9999;
-  user-select: none;
-">🔊</button>
+    hummingAudio.volume = 0.5;
+    // Try to play; if blocked by autoplay policy, fallback silently and rely on user toggle
+    hummingAudio.play().catch(() => {});
 
-<script>
-  const hummingAudio = document.getElementById('hummingAudio');
-  const muteBtn = document.getElementById('muteBtn');
-
-  // Set audio volume and play immediately
-  hummingAudio.volume = 0.5;
-  hummingAudio.play();
-
-  muteBtn.addEventListener('click', () => {
-    if (hummingAudio.muted) {
-      hummingAudio.muted = false;
-      muteBtn.textContent = '🔊';
-    } else {
-      hummingAudio.muted = true;
-      muteBtn.textContent = '🔇';
-    }
-  });
-</script>
+    muteBtn.addEventListener('click', () => {
+      if (hummingAudio.muted) {
+        hummingAudio.muted = false;
+        muteBtn.textContent = '🔊';
+      } else {
+        hummingAudio.muted = true;
+        muteBtn.textContent = '🔇';
+      }
+    });
+  </script>
 </body>
 </html>
