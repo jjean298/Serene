@@ -337,6 +337,11 @@
         // removing  alert("Login successful!");
           window.location.href = "dashboard.html";
         })
+        // Delay redirect by 1.5 seconds (1500 ms)
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 1500);
+  })
         .catch(error => {
           alert("Login failed: " + error.message);
         });
