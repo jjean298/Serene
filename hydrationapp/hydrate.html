@@ -51,6 +51,7 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
 
     input[type="number"] {
@@ -88,11 +89,27 @@
     #history-list {
       list-style-type: none;
       padding-left: 0;
+      margin-bottom: 15px;
     }
 
     #history-list li {
       padding: 6px 0;
       border-bottom: 1px solid #eee;
+    }
+
+    .calculator-link {
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .calculator-link a {
+      color: #006994;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .calculator-link a:hover {
+      text-decoration: underline;
     }
 
     /* Mute button */
@@ -115,29 +132,32 @@
 
   <!-- Waterfall Sound -->
   <audio id="waterfall-audio" autoplay loop>
-  <source src="waterfall.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+    <source src="waterfall.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
   <!--MAIN SECTION START-->
   <div class="container">
     <h1>Serene Hydration</h1>
 
     <div class="input-container">
-      <label for="amount">Enter amount of water (in mL)</label>
+      <label for="amount">Enter amount of water (in oz)</label>
       <div class="input-group">
-        <input type="number" id="amount" placeholder="Enter Amount" />
+        <input type="number" id="amount" placeholder="e.g. 8" min="0" step="0.1" />
         <button onclick="addWater()">Add</button>
       </div>
     </div>
 
     <div class="summary">
-      <h2>Today's Water Intake: <span id="total">0</span> mL</h2>
+      <h2>Today's Water Intake: <span id="total">0</span> oz</h2>
     </div>
 
     <div class="history">
       <h2>Water Intake History</h2>
       <ul id="history-list"></ul>
+      <div class="calculator-link">
+        <p>Calculate your recommended intake <a href="https://www.cise.ufl.edu/~scarpio/cis4930/assign2/index.html" target="_blank" rel="noopener">here</a>.</p>
+      </div>
     </div>
   </div>
   <!--MAIN SECTION ENDS-->
@@ -149,13 +169,13 @@
 
     function addWater() {
       const input = document.getElementById('amount');
-      const amount = parseInt(input.value);
+      const amount = parseFloat(input.value);
 
       if (!isNaN(amount) && amount > 0) {
         total += amount;
-        totalDisplay.textContent = total;
+        totalDisplay.textContent = total.toFixed(1);
         const li = document.createElement('li');
-        li.textContent = `${amount} mL added`;
+        li.textContent = `${amount.toFixed(1)} oz added`;
         historyList.prepend(li);
         input.value = '';
       } else {
