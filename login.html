@@ -311,42 +311,39 @@
   <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
 
   <script>
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
-      authDomain: "serene-interface.firebaseapp.com",
-      projectId: "serene-interface",
-      storageBucket: "serene-interface.appspot.com", //  fixed typo
-      messagingSenderId: "877337255174",
-      appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
-    };
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
+    authDomain: "serene-interface.firebaseapp.com",
+    projectId: "serene-interface",
+    storageBucket: "serene-interface.appspot.com", // correct bucket
+    messagingSenderId: "877337255174",
+    appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
+  };
 
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
 
-    // Handle login form submission
-    document.getElementById("login-form").addEventListener("submit", function(e) {
-      e.preventDefault(); // prevent form from submitting normally
+  // Handle login form submission
+  document.getElementById("login-form").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-      const email = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+    const email = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
-      auth.signInWithEmailAndPassword(email, password)
-        .then(userCredential => {
-        // removing  alert("Login successful!");
+    auth.signInWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        //  jst show a quick loading state here instead of alert
+        setTimeout(() => {
           window.location.href = "dashboard.html";
-        })
-        // Delay redirect by 3 seconds (1500 ms)
-    setTimeout(() => {
-      window.location.href = "dashboard.html";
-    }, 3000);
-  })
-        .catch(error => {
-          alert("Login failed: " + error.message);
-        });
-    });
-  </script>
+        }, 2000); // 2 second delay
+      })
+      .catch(error => {
+        alert("Login failed: " + error.message);
+      });
+  });
+</script>
 
 </body>
 </html>
