@@ -1,33 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hydration</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hydration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #d4f1f4, #fff);
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      position: relative;
+    }
 
-        <!--MAIN SECTION START-->
-        <div class="container">
-            <h1>Serene Hydration</h1>
-            <div class="input-container">
-                <label for="amount">Enter amount of water (in mL)</label>
-                <div class="input-group">
-                    <input type="number" id="amount" placeholder="Enter Amount" />
-                    <button onclick="addWater()">Add</button>
-                </div>
-            </div>
-            <div class="summary">
-               <h2>Today's Water Intake: <span id="total">0</span></h2> 
-            </div>
-            <div class="history">
-                <h2>Water Intake History</h2>
-                <ul id="history-list"></ul>
-            </div>
-        </div>
-        <!--MAIN SECTION ENDS-->
+    .container {
+      background-color: #ffffffdd;
+      padding: 40px;
+      margin-top: 80px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
 
-    <script src="script.js"></script>
-    </body>
+    h1 {
+      color: #278ea5;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .input-container {
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[type="number"] {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 150px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #278ea5;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #1d6e80;
+    }
+
+    .summary, .history {
+      margin-top: 25px;
+    }
+
+    .summary h2, .history h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+
+    #history-list {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    #history-list li {
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    /* Mute button */
+    #mute-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mute/Unmute Button -->
+  <button id="mute-btn" onclick="toggleAudio()">🔊</button>
+
+  <!-- Waterfall Sound -->
+  <audio id="waterfall-audio" autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2022/08/08/audio_dce54e4cb6.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!--MAIN SECTION START-->
+  <div class="container">
+    <h1>Serene Hydration</h1>
+
+    <div class="input-container">
+      <label for="amount">Enter amount of water (in mL)</label>
+      <div class="input-group">
+        <input type="number" id="amount" placeholder="Enter Amount" />
+        <button onclick="addWater()">Add</button>
+      </div>
+    </div>
+
+    <div class="summary">
+      <h2>Today's Water Intake: <span id="total">0</span> mL</h2>
+    </div>
+
+    <div class="history">
+      <h2>Water Intake History</h2>
+      <ul id="history-list"></ul>
+    </div>
+  </div>
+  <!--MAIN SECTION ENDS-->
+
+  <script>
+    let total = 0;
+    const totalDisplay = document.getElementById('total');
+    const historyList = document.getElementById('history-list');
+
+    function addWater() {
+      const input = document.getElementById('amount');
+      const amount = parseInt(input.value);
+
+      if (!isNaN(amount) && amount > 0) {
+        total += amount;
+        totalDisplay.textContent = total;
+        const li = document.createElement('li');
+        li.textContent = `${amount} mL added`;
+        historyList.prepend(li);
+        input.value = '';
+      } else {
+        alert('Please enter a valid amount.');
+      }
+    }
+
+    function toggleAudio() {
+      const audio = document.getElementById('waterfall-audio');
+      const btn = document.getElementById('mute-btn');
+      if (audio.paused) {
+        audio.play();
+        btn.textContent = '🔊';
+      } else {
+        audio.pause();
+        btn.textContent = '🔇';
+      }
+    }
+  </script>
+
+</body>
 </html>
