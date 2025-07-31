@@ -338,11 +338,13 @@
 
 <!-- 1. Load Firebase SDKs first -->
 
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
- <!-- 2. Then initialize and use Firebase -->
-  <script>
-    const firebaseConfig = {
+<!-- ✅ CORRECT Firebase SDKs for browser -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
     apiKey: "AIzaSyCLAbnBIbcLWlvzA-KrIPhtKSDAhfxA3tg",
     authDomain: "serene-interface.firebaseapp.com",
     projectId: "serene-interface",
@@ -350,40 +352,43 @@
     messagingSenderId: "877337255174",
     appId: "1:877337255174:web:c898ec9d14f4e8cadd5287"
   };
-//initialize before calling auth
-     firebase.initializeApp(firebaseConfig);
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
   const auth = firebase.auth();
-    
+  const db = firebase.firestore();
+
   document.getElementById("signup-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    const email = document.getElementById("email").value;
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirm-password").value;
-    auth.createUserWithEmailAndPassword(email, password)
-      if (password !== confirmPassword) {
-        alert("Passwords do not match.");
-        return;
-      }
 
-      auth.createUserWithEmailAndPassword(email, password)
-        .then(userCredential => {
-          // Store the custom username in Firestore under 'users' collection
-          const user = userCredential.user;
-          return db.collection("users").doc(user.uid).set({
-            email: email,
-            username: username,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
-          });
-        })
-        .then(() => {
-          alert("Signup successful!");
-          window.location.href = "login.html";
-        })
-        .catch(error => {
-          alert("Signup failed: " + error.message);
+    const email = document.getElementById("email").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    auth.createUserWithEmailAndPassword(email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        return db.collection("users").doc(user.uid).set({
+          email: email,
+          username: username,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
         });
-    });
-  </script>
+      })
+      .then(() => {
+        alert("Signup successful!");
+        window.location.href = "login.html";
+      })
+      .catch(error => {
+        alert("Signup failed: " + error.message);
+      });
+  });
+</script>
+
 </body>
 </html>
