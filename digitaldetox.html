@@ -6,60 +6,524 @@
   <title>Digital Detox</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --primary: #6c5ce7;
+      --accent: #a29bfe;
+      --radius: 14px;
+      --shadow: 0 20px 50px -10px rgba(108,92,231,0.15);
+      --bg: linear-gradient(to bottom, #e3e9f5, #f5f7fa);
+    }
+    *{box-sizing:border-box;}
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom, #f0f4f8, #fff);
+      background: var(--bg);
       margin: 0;
-      padding: 40px;
+      padding: 40px 16px;
       text-align: center;
       color: #2a3a4a;
+      min-height: 100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:20px;
     }
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
+      margin: 0;
+      color: #4a2fcc;
     }
     p {
-      max-width: 600px;
-      margin: 0 auto 2rem auto;
+      max-width: 700px;
+      margin: 0 auto 20px auto;
       font-size: 1.1rem;
       line-height: 1.6;
       color: #555;
     }
-    button {
-      padding: 12px 24px;
-      border: none;
-      background-color: #4a90e2;
-      color: white;
-      font-weight: 600;
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 900px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+    .split {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      justify-content: center;
+    }
+    .box {
+      flex: 1 1 320px;
+      background: linear-gradient(135deg,#f7f7fc,#eef3fb);
       border-radius: 12px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      display: block;
-      margin: 0 auto 30px auto; /* Center and add bottom margin */
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    button:hover {
-      background-color: #357ABD;
+    .pill {
+      display:inline-block;
+      background:#f0edff;
+      padding:6px 14px;
+      border-radius:999px;
+      font-size:0.75rem;
+      color:#9a4adf;
+      font-weight:600;
+      margin-bottom:6px;
     }
-    /* Video styling */
+    .checklist {
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-direction: column;
+      gap:8px;
+      text-align:left;
+    }
+    .checklist li {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:0.95rem;
+    }
+    .preset-buttons {
+      display:flex;
+      gap:12px;
+      flex-wrap: wrap;
+      justify-content:center;
+      margin-bottom:10px;
+    }
+    .preset-buttons button {
+      padding:10px 16px;
+      background: var(--primary);
+      border:none;
+      color:white;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:600;
+      transition:filter .2s ease;
+    }
+    .preset-buttons button.active,
+    .preset-buttons button:hover {
+      filter:brightness(1.1);
+    }
+    .big-btn {
+      padding:14px 28px;
+      background: var(--primary);
+      border:none;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:1rem;
+      font-weight:600;
+      color:white;
+      transition:all .25s ease;
+      margin-top:6px;
+    }
+    .big-btn.secondary {
+      background: #f3f3f8;
+      color: #4a2fcc;
+    }
+    .timer-display {
+      font-size:3rem;
+      font-weight:700;
+      margin:14px 0 6px;
+      letter-spacing:1px;
+    }
+    .small {
+      font-size:0.85rem;
+      color:#666;
+    }
+    .history {
+      margin-top:10px;
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .history-card {
+      background:#f9f9f9;
+      flex:1 1 220px;
+      border-radius:12px;
+      padding:16px 14px;
+      position:relative;
+      min-width:220px;
+    }
+    .streak {
+      display:inline-block;
+      background: #ffe4f7;
+      padding:6px 14px;
+      border-radius:999px;
+      font-size:0.75rem;
+      margin-bottom:6px;
+      color:#9a4adf;
+      font-weight:600;
+    }
+    .session-item {
+      font-size:0.9rem;
+      margin-bottom:6px;
+      text-align:left;
+    }
+    .reflection-box {
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    textarea {
+      width:100%;
+      min-height:80px;
+      border-radius:10px;
+      border:1px solid #ccc;
+      padding:10px;
+      resize: vertical;
+      font-family: inherit;
+      font-size:0.9rem;
+    }
+    .save-reflection {
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+    }
+    .footer {
+      margin-top:30px;
+      font-size:0.75rem;
+      text-align:center;
+      color:#666;
+    }
+
     video {
-  max-width: 500px;   /* max width to limit size */
-  width: 100%;        /* responsive - fills container but max 500px */
-  height: auto;       /* maintain aspect ratio */
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: block;
-  margin: 0 auto;
-}
+      max-width: 500px;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: block;
+      margin: 30px auto 0;
+    }
+
+    .focus-mode-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .overlay-inner {
+      background: white;
+      padding: 28px 32px;
+      border-radius: 14px;
+      max-width: 380px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 60px -10px rgba(108,92,231,0.2);
+    }
+    .disabled {
+      opacity:0.6;
+      pointer-events:none;
+    }
   </style>
 </head>
 <body>
-  <h1>Digital Detox</h1>
-  <p>Take breaks from your screens and reconnect with the real world. Try guided unplugging sessions to recharge your mind and body.</p>
-  <button onclick="alert('Starting your digital detox session!')">Start Detox Session</button>
+
+  <div class="card">
+    <div>
+      <h1>Digital Detox</h1>
+      <p class="sub">Start a focused break—disconnect to reconnect. Complete the checklist then hit start.</p>
+    </div>
+
+    <div class="split">
+      <!-- Checklist -->
+      <div class="box">
+        <div class="pill">Before you begin</div>
+        <ul class="checklist">
+          <li><input type="checkbox" id="chk-phone" /> <label for="chk-phone">Turn off or silence your phone</label></li>
+          <li><input type="checkbox" id="chk-notifs" /> <label for="chk-notifs">Close distracting tabs/apps</label></li>
+          <li><input type="checkbox" id="chk-focus" /> <label for="chk-focus">Let others know you’ll be offline</label></li>
+          <li><input type="checkbox" id="chk-breathe" /> <label for="chk-breathe">Take a deep breath</label></li>
+        </ul>
+        <div class="small">You can still start even if you don’t check every box.</div>
+      </div>
+
+      <!-- Timer & Reflection -->
+      <div class="box">
+        <div class="pill">Session</div>
+        <div class="preset-buttons" aria-label="Presets">
+          <button data-min="5" class="preset active">5m</button>
+          <button data-min="15" class="preset">15m</button>
+          <button data-min="30" class="preset">30m</button>
+          <button data-min="60" class="preset">60m</button>
+        </div>
+        <div class="timer-area">
+          <div id="timer-display" class="timer-display">05:00</div>
+          <div class="small" id="status-text">Ready to start</div>
+          <div style="margin-top:12px;">
+            <button id="start-btn" class="big-btn primary">Start Detox</button>
+            <button id="cancel-btn" class="big-btn secondary" style="display:none;">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Reflection -->
+        <div id="reflection-section" style="display:none;">
+          <div class="subhead" style="font-weight:600; margin-bottom:6px;">Quick reflection</div>
+          <div class="reflection-box">
+            <label for="reflection-text">How do you feel after that?</label>
+            <textarea id="reflection-text" placeholder="Optional—one sentence"></textarea>
+            <div class="save-reflection">
+              <button id="save-reflection-btn" class="big-btn">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Summary + history -->
+    <div style="margin-top:4px;">
+      <div class="streak">Current streak: <span id="streak-count">0</span> day(s)</div>
+      <div style="margin-top:4px;">Total detox time today: <strong><span id="today-total">0</span> min</strong></div>
+    </div>
+
+    <div class="history">
+      <div class="history-card">
+        <div style="font-weight:600; margin-bottom:6px;">Recent Sessions</div>
+        <div id="history-list">
+          <!-- populated dynamically -->
+        </div>
+      </div>
+      <div class="history-card">
+        <div style="font-weight:600; margin-bottom:6px;">Tip</div>
+        <p style="margin:0; font-size:0.85rem;">Combine a short detox with deep breathing and hydrate right after to extend the benefit.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      Sessions are stored locally. Reflection builds awareness. Future iterations can sync per account.
+    </div>
+  </div>
 
   <video autoplay loop muted playsinline>
     <source src="breathing woman.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
+
+  <div id="focus-overlay" class="focus-mode-overlay" style="display:none;">
+    <div class="overlay-inner">
+      <div style="font-size:1.2rem; font-weight:600; margin-bottom:4px;">Digital Detox</div>
+      <div id="overlay-timer" style="font-size:2.5rem; font-weight:700;">05:00</div>
+      <div style="margin-top:6px;" id="overlay-status">Stay focused</div>
+      <div style="margin-top:12px;">
+        <button id="overlay-cancel" class="big-btn secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // persistence key
+    const STORAGE_KEY = 'serene_detox_sessions';
+
+    function loadAll() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      } catch { return []; }
+    }
+    function saveAll(arr) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+    }
+    function getTodayKey() {
+      return new Date().toISOString().slice(0,10);
+    }
+
+    // state
+    let currentDuration = 5 * 60; // seconds
+    let timer = null;
+    let sessionStart = null;
+
+    // elements
+    const timerDisplay = document.getElementById('timer-display');
+    const statusText = document.getElementById('status-text');
+    const startBtn = document.getElementById('start-btn');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const reflectionSection = document.getElementById('reflection-section');
+    const reflectionText = document.getElementById('reflection-text');
+    const saveReflectionBtn = document.getElementById('save-reflection-btn');
+    const streakCountEl = document.getElementById('streak-count');
+    const todayTotalEl = document.getElementById('today-total');
+    const historyListEl = document.getElementById('history-list');
+    const presetButtons = document.querySelectorAll('.preset');
+    const focusOverlay = document.getElementById('focus-overlay');
+    const overlayTimerEl = document.getElementById('overlay-timer');
+    const overlayStatus = document.getElementById('overlay-status');
+    const overlayCancel = document.getElementById('overlay-cancel');
+
+    function formatTime(sec) {
+      const m = Math.floor(sec/60).toString().padStart(2,'0');
+      const s = (sec%60).toString().padStart(2,'0');
+      return `${m}:${s}`;
+    }
+
+    function updateTimerDisplay(sec) {
+      timerDisplay.textContent = formatTime(sec);
+      overlayTimerEl.textContent = formatTime(sec);
+    }
+
+    function loadAndRenderHistory() {
+      const all = loadAll();
+      const todayKey = getTodayKey();
+      const todaySessions = all.filter(s => s.day === todayKey);
+      const totalMinutesToday = todaySessions.reduce((sum,s) => sum + s.duration, 0);
+      todayTotalEl.textContent = totalMinutesToday.toFixed(0);
+
+      // streak
+      const daysWithSession = [...new Set(all.map(s => s.day))].sort().reverse();
+      let streak = 0;
+      let cursor = new Date();
+      while (true) {
+        const key = cursor.toISOString().slice(0,10);
+        if (daysWithSession.includes(key)) {
+          streak++;
+          cursor.setDate(cursor.getDate()-1);
+        } else break;
+      }
+      streakCountEl.textContent = streak;
+
+      // recent
+      const recent = all.slice().sort((a,b)=> new Date(b.createdAt) - new Date(a.createdAt)).slice(0,7);
+      historyListEl.innerHTML = '';
+      if (recent.length === 0) {
+        historyListEl.innerHTML = '<div class="session-item">No sessions yet.</div>';
+      } else {
+        recent.forEach(s => {
+          const div = document.createElement('div');
+          div.className = 'session-item';
+          const timeStr = new Date(s.start).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+          div.textContent = `${s.preset} • ${s.duration.toFixed(0)} min (${timeStr})`;
+          if (s.reflection) {
+            const refl = document.createElement('div');
+            refl.style.fontSize='0.75rem';
+            refl.style.marginTop='4px';
+            refl.textContent = `“${s.reflection}”`;
+            div.appendChild(refl);
+          }
+          historyListEl.appendChild(div);
+        });
+      }
+    }
+
+    function startSession() {
+      if (timer) return;
+      sessionStart = Date.now();
+      let remaining = currentDuration;
+      updateTimerDisplay(remaining);
+      statusText.textContent = 'In progress...';
+      startBtn.textContent = 'Detoxing...';
+      startBtn.classList.add('disabled');
+      cancelBtn.style.display = 'inline-block';
+      reflectionSection.style.display = 'none';
+
+      // show overlay
+      focusOverlay.style.display = 'flex';
+      overlayStatus.textContent = 'Stay focused';
+
+      timer = setInterval(() => {
+        remaining--;
+        updateTimerDisplay(remaining);
+        if (remaining <= 0) {
+          endSession();
+        }
+      }, 1000);
+    }
+
+    function cancelSession() {
+      if (!timer) return;
+      clearInterval(timer);
+      timer = null;
+      statusText.textContent = 'Canceled';
+      startBtn.textContent = 'Start Detox';
+      startBtn.classList.remove('disabled');
+      cancelBtn.style.display = 'none';
+      updateTimerDisplay(currentDuration);
+      focusOverlay.style.display = 'none';
+    }
+
+    function endSession() {
+      if (!timer) return;
+      clearInterval(timer);
+      timer = null;
+      const endTime = Date.now();
+      const durationMinutes = (endTime - sessionStart) / 60000;
+      statusText.textContent = 'Session complete';
+      startBtn.textContent = 'Start Detox';
+      startBtn.classList.remove('disabled');
+      cancelBtn.style.display = 'none';
+      updateTimerDisplay(0);
+      focusOverlay.style.display = 'none';
+
+      // show reflection
+      reflectionSection.style.display = 'block';
+
+      // save pending session
+      const sessionObj = {
+        day: getTodayKey(),
+        start: new Date(sessionStart).toISOString(),
+        end: new Date(endTime).toISOString(),
+        duration: durationMinutes,
+        preset: `${Math.round(currentDuration/60)}m`,
+        reflection: '',
+        createdAt: new Date().toISOString()
+      };
+      window._lastSession = sessionObj;
+    }
+
+    // preset selection
+    presetButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        presetButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mins = parseInt(btn.dataset.min,10);
+        currentDuration = mins * 60;
+        updateTimerDisplay(currentDuration);
+        statusText.textContent = `Preset: ${mins} minute${mins===1?'':'s'}`;
+      });
+    });
+
+    startBtn.addEventListener('click', () => {
+      if (!timer) startSession();
+    });
+    cancelBtn.addEventListener('click', () => {
+      cancelSession();
+    });
+    overlayCancel.addEventListener('click', () => {
+      cancelSession();
+    });
+
+    saveReflectionBtn.addEventListener('click', () => {
+      const reflection = reflectionText.value.trim();
+      const all = loadAll();
+      if (window._lastSession) {
+        const sessionObj = window._lastSession;
+        sessionObj.reflection = reflection;
+        all.push(sessionObj);
+        saveAll(all);
+        reflectionText.value = '';
+        reflectionSection.style.display = 'none';
+        loadAndRenderHistory();
+        window._lastSession = null;
+        statusText.textContent = 'Saved';
+      }
+    });
+
+    // init
+    updateTimerDisplay(currentDuration);
+    loadAndRenderHistory();
+  </script>
 </body>
 </html>
