@@ -5,19 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Digital Detox</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-  <script>
-  function currentTime()
-    {
-      var today = new Date();
-      var hour = today.getHours();
-      var minutes = today.getMinutes();
-      var sec = today.getSeconds();
-      minutes = checkTime(minutes);
-      sec = checkTime(sec);
-      document.getElementById('txt').innerHTML = "Current Time : "+hour+":"+minutes+":"+sec;
-      var t = setTimeout(function(){currentTime()},500);
-    }
-  </script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -65,8 +52,7 @@
 }
   </style>
 </head>
-<body onload="currentTime()">
-  <script>currentTime();</script>
+<body>
   <h1>Digital Detox</h1>
   <p>Take breaks from your screens and reconnect with the real world. Try guided unplugging sessions to recharge your mind and body.</p>
   <button onclick="alert('Starting your digital detox session!')">Start Detox Session</button>
