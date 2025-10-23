@@ -1,8 +1,7 @@
-# 🌿 Serene
+# 🌿 [Serene](https://jjean298.github.io/serene)
 
 **Serene** is a self-care reminder web app built to help students and working professionals manage stress and find balance in their daily routines. It’s designed to provide mindful breaks that refresh focus, calm the mind, and boost overall well-being.  
 
-👉 **Live Demo:** [Serene](https://jjean298.github.io/serene)
 
 ## ✨ Overview
 Serene allows users to take a break from the noise of everyday life and choose relaxation exercises that best suit their needs. Each feature is built with intention—rooted in both simplicity and psychology—to help users feel grounded and re-energized.
